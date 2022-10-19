@@ -48,22 +48,29 @@ def word_tokenize(file_name):
         rbCount = 0
         inCount = 0
         vbCount = 0
-        dtCount = 0
+        prCount = 0
 
         for tag in tagged:
-            # сущ
+            # Существительное
             if 'NN' in tag[1]: nnCount += 1
+            # Прилагательное
             elif 'JJ' in tag[1]: jjCount += 1
+            # Наречия
             elif 'RB' in tag[1]: rbCount += 1
-            elif 'IN' in tag[1]: inCount += 1
-            elif 'VB' in tag[1]: vbCount += 1
-            elif 'DT' in tag[1]: dtCount += 1
-
+             # Междометия
+            elif 'IN' in tag[1]:
+                inCount += 1
+            # Глаголы
+            elif 'VB' in tag[1]:
+                vbCount += 1
+            # Предлоги
+            elif 'PR' in tag[1]:
+                prCount += 1
 
     new_file = './task_output.txt'
     with open(new_file, 'w', encoding='utf-8') as txt_file:
         txt_file.write(
-            f'NN: {nnCount}\nJJ: {jjCount}\nRB: {rbCount}\nIN: {inCount}\nVB: {vbCount}\nDt: {dtCount}')
+            f'NN: {nnCount}\nJJ: {jjCount}\nRB: {rbCount}\nIN: {inCount}\nVB: {vbCount}\nPR: {prCount}')
 
 
 #txt_writer(bs, new_file, dir)

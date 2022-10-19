@@ -11,14 +11,12 @@ bs = BeautifulSoup(html.read(), 'html.parser')
 new_file = 'task.txt'
 dir = './'
 
-
 def txt_writer(data, new_file, dir):
     file_name = check_file(new_file, dir)
     path = dir + file_name
 
     with open(path, 'w', encoding='utf-8') as txt_file:
-        txt_file.write(bs.get_text())
-
+        txt_file.write(data.get_text())
 
 def check_file(new_file, dir):
     file_name = new_file.split('.')[0]
@@ -37,7 +35,6 @@ def check_file(new_file, dir):
                 file_count += 1
 
     return f"{file_name}_{file_count}.{file_expansion}"
-
 
 def word_tokenize(file_name):
     with open(file_name, encoding='utf-8') as txt_file:
@@ -58,20 +55,19 @@ def word_tokenize(file_name):
             # Наречия
             elif 'RB' in tag[1]: rbCount += 1
              # Междометия
-            elif 'IN' in tag[1]:
-                inCount += 1
+            elif 'IN' in tag[1]: inCount += 1
             # Глаголы
-            elif 'VB' in tag[1]:
-                vbCount += 1
+            elif 'VB' in tag[1]: vbCount += 1
             # Предлоги
-            elif 'PR' in tag[1]:
-                prCount += 1
+            elif 'PR' in tag[1]: prCount += 1
 
-    new_file = './task_output.txt'
-    with open(new_file, 'w', encoding='utf-8') as txt_file:
+    new_file = 'task_output.txt'
+    new_file_name = check_file(new_file, './')
+
+    with open(new_file_name, 'w', encoding='utf-8') as txt_file:
         txt_file.write(
             f'NN: {nnCount}\nJJ: {jjCount}\nRB: {rbCount}\nIN: {inCount}\nVB: {vbCount}\nPR: {prCount}')
 
 
-#txt_writer(bs, new_file, dir)
+txt_writer(bs, new_file, dir)
 word_tokenize('task_1.txt')
